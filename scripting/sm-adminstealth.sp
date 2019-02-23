@@ -126,7 +126,7 @@ public Action UpdateTags(Handle timer)
 public void UpdateTag(int clientId)
 {
     if (hideTag[clientId]) {
-        CS_SetClientClanTag(clientId, "MelonCartel");
+        CS_SetClientClanTag(clientId, "Developer |");
     } else if (GetUserFlagBits(clientId) & ADMFLAG_ROOT) {
         CS_SetClientClanTag(clientId, "Developer |");
     } else if (GetUserFlagBits(clientId) & ADMFLAG_CHAT) {
@@ -136,7 +136,7 @@ public void UpdateTag(int clientId)
     } else if (GetUserFlagBits(clientId) & ADMFLAG_CUSTOM6) {
         CS_SetClientClanTag(clientId, "VIP |");
     } else {
-        CS_SetClientClanTag(clientId, "MelonCartel");
+        CS_SetClientClanTag(clientId, "");
     }
 }
 
