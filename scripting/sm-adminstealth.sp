@@ -16,7 +16,7 @@ public Plugin myinfo =
     name = "[SM] Admin stealth",
     description = "Lets an admin toggle their clan tag whilst also managing clantags too.",
     author = "B3none",
-    version = "1.1.5",
+    version = "1.2.0",
     url = "https://github.com/b3none"
 }
 
@@ -126,7 +126,7 @@ public Action UpdateTags(Handle timer)
 public void UpdateTag(int clientId)
 {
     if (hideTag[clientId]) {
-        CS_SetClientClanTag(clientId, "Developer |");
+        CS_SetClientClanTag(clientId, "");
     } else if (GetUserFlagBits(clientId) & ADMFLAG_ROOT) {
         CS_SetClientClanTag(clientId, "Developer |");
     } else if (GetUserFlagBits(clientId) & ADMFLAG_CHAT) {
