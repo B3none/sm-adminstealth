@@ -5,11 +5,10 @@
 #pragma semicolon 1
 #pragma newdecls required
 
-Handle g_hCookieHidden;
-
-bool hideTag[MAXPLAYERS + 1];
-
 #define MESSAGE_PREFIX "[\x02AdminStealth\x01]"
+
+Handle g_hCookieHidden;
+bool hideTag[MAXPLAYERS + 1];
 
 public Plugin myinfo =
 {
@@ -26,10 +25,10 @@ public void OnPluginStart()
     HookEvent("round_end", OnRoundStartOrEnd);
     HookEvent("player_spawn", OnPlayerSpawn);
 
-	// Stealth commands.
+    // Stealth commands.
     RegAdminCmd("sm_stealth", StealthCommand, ADMFLAG_GENERIC);
 
-	// Unstealth commands.
+    // Unstealth commands.
     RegAdminCmd("sm_unstealth", RevealCommand, ADMFLAG_GENERIC);
     RegAdminCmd("sm_reveal", RevealCommand, ADMFLAG_GENERIC);
 
@@ -41,7 +40,8 @@ public void OnClientCookiesCached(int client)
 	char strCookie[8];
 	GetClientCookie(client, g_hCookieHidden, strCookie, sizeof(strCookie));
 
-	if (StringToInt(strCookie) == 0) {
+	if (StringToInt(strCookie) == 0)
+	{
 		SetCookie(client, g_hCookieHidden, false);
 	}
 
@@ -114,9 +114,9 @@ public Action RevealCommand(int client, int args)
 
 public Action UpdateTags(Handle timer)
 {
-    for(int clientId = 0; clientId <= MaxClients; clientId++) 
+    for (int clientId = 0; clientId <= MaxClients; clientId++) 
     {
-        if(IsValidClient(clientId))
+        if (IsValidClient(clientId))
         {
             UpdateTag(clientId);
         }
@@ -125,17 +125,28 @@ public Action UpdateTags(Handle timer)
 
 public void UpdateTag(int clientId)
 {
-    if (hideTag[clientId]) {
+    if (hideTag[clientId]) 
+    {
         CS_SetClientClanTag(clientId, "");
-    } else if (GetUserFlagBits(clientId) & ADMFLAG_ROOT) {
+    }
+    else if (GetUserFlagBits(clientId) & ADMFLAG_ROOT)
+    {
         CS_SetClientClanTag(clientId, "Developer |");
-    } else if (GetUserFlagBits(clientId) & ADMFLAG_CHAT) {
+    }
+    else if (GetUserFlagBits(clientId) & ADMFLAG_CHAT)
+    {
         CS_SetClientClanTag(clientId, "Admin |");
-    } else if (GetUserFlagBits(clientId) & ADMFLAG_GENERIC) {
+    }
+    else if (GetUserFlagBits(clientId) & ADMFLAG_GENERIC)
+    {
         CS_SetClientClanTag(clientId, "Mod |");
-    } else if (GetUserFlagBits(clientId) & ADMFLAG_CUSTOM6) {
+    }
+    else if (GetUserFlagBits(clientId) & ADMFLAG_CUSTOM6)
+    {
         CS_SetClientClanTag(clientId, "VIP |");
-    } else {
+    }
+    else
+    {
         CS_SetClientClanTag(clientId, "");
     }
 }
